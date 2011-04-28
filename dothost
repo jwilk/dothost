@@ -1,0 +1,84 @@
+#!/usr/bin/python3
+
+import sys
+import argparse
+import collections
+import socket
+
+description = \
+'''
+host(1) with Graphviz output.
+'''
+
+template_begin = '''
+digraph {
+    rankdir=LR
+    edge [arrowsize=0.5, arrowhead="vee"]
+    node [fontsize=10, width=0, height=0, shape=box]
+'''
+
+template_end = '''
+}
+'''
+
+class ArgumentParser(argparse.ArgumentParser):
+    def __init__(self):
+        argparse.ArgumentParser.__init__(self, description=description)
+        self.add_argument('addresses', metavar='ADDRESS', nargs='+', help='IP address or domain name')
+
+class Mapping(object):
+
+    def __init__(self, pending=()):
+        self.pending = set(pending)
+        self.initial = frozenset(pending)
+        self.done = set()
+        self.mapping = collections.defaultdict(set)
+
+    def add(self, source, target):
+        self.done.add(source)
+        if source == target:
+            return
+        if target not in self.done:
+            self.pending.add(target)
+        self.mapping[source].add(target)
+
+    def update_all(self):
+        while self.pending:
+            self.update()
+
+    def update(self):
+        address = self.pending.pop()
+        try:
+            host, _, ips = socket.gethostbyaddr(address)
+            for ip in ips:
+                self.add(ip, host)
+        except (socket.gaierror, socket.herror):
+            pass
+        try:
+            for _, _, _, _, ip in socket.getaddrinfo(address, 0):
+                self.add(address, ip[0])
+        except socket.gaierror:
+            return set()
+        self.done.add(address)
+
+    def print(self, stdout=None):
+        if stdout is None:
+            stdout = sys.stdout
+        print(template_begin, file=stdout)
+        for source, targets in self.mapping.items():
+            if source in self.initial:
+                print('"{source}" [style=bold]'.format(source=source))
+            for target in targets:
+                print('"{source}" -> "{target}"'.format(source=source, target=target), file=stdout)
+        print(template_end, file=stdout)
+
+def main():
+    options = ArgumentParser().parse_args()
+    mapping = Mapping(pending = options.addresses)
+    mapping.update_all()
+    mapping.print()
+
+if __name__ == '__main__':
+    main()
+
+# vim:ts=4 sw=4 et
