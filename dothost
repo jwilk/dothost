@@ -64,13 +64,13 @@ class Mapping(object):
     def print(self, stdout=None):
         if stdout is None:
             stdout = sys.stdout
-        print(template_begin, file=stdout)
+        print(template_begin.strip(), file=stdout)
         for source, targets in self.mapping.items():
             if source in self.initial:
-                print('"{source}" [style=bold]'.format(source=source))
+                print('    "{source}" [style=bold]'.format(source=source))
             for target in targets:
-                print('"{source}" -> "{target}"'.format(source=source, target=target), file=stdout)
-        print(template_end, file=stdout)
+                print('    "{source}" -> "{target}"'.format(source=source, target=target), file=stdout)
+        print(template_end.strip(), file=stdout)
 
 def main():
     options = ArgumentParser().parse_args()
