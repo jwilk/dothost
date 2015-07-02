@@ -1,0 +1,14 @@
+language: python
+python:
+- "3.2"
+- "3.3"
+- "3.4"
+before_install:
+- sudo apt-get update
+- sudo apt-get install libgraph-easy-perl
+script:
+- python dothost www.iana.org > iana.dot
+- cat iana.dot
+- graph-easy --as boxart < iana.dot
+
+# vim:ts=2 sts=2 sw=2 et
