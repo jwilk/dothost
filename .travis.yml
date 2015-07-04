@@ -7,9 +7,12 @@ python:
 before_install:
 - sudo apt-get update
 - sudo apt-get install libgraph-easy-perl
+install:
+- pip install docutils
 script:
 - python dothost www.iana.org > iana.dot
 - cat iana.dot
 - graph-easy --as boxart < iana.dot
+- find -name "*.rst" -print -exec rst2pseudoxml.py --strict {} /dev/null ";"
 
 # vim:ts=2 sts=2 sw=2 et
