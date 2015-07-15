@@ -8,13 +8,17 @@ addons:
   apt:
     packages:
     - cpanminus
+cache:
+  directories:
+  - $HOME/.cache
+  - $HOME/perl5
 install:
-- cpanm Graph::Easy
+- export PERL5LIB="$HOME/perl5/lib/perl5"
+- perl -MGraph::Easy -e '' || cpanm Graph::Easy
 - pip install docutils
 script:
 - python dothost www.iana.org > iana.dot
 - cat iana.dot
-- export PERL5LIB="$HOME/perl5/lib/perl5"
 - export PATH="$PATH:$HOME/perl5/bin"
 - graph-easy --as boxart < iana.dot
 - find -name "*.rst" | xargs -L1 -t -I{} rst2xml.py --strict {} /dev/null
