@@ -4,14 +4,18 @@ python:
 - "3.3"
 - "3.4"
 - pypy3
-before_install:
-- sudo apt-get update
-- sudo apt-get install libgraph-easy-perl
+addons:
+  apt:
+    packages:
+    - cpanminus
 install:
+- cpanm Graph::Easy
 - pip install docutils
 script:
 - python dothost www.iana.org > iana.dot
 - cat iana.dot
+- export PERL5LIB="$HOME/perl5/lib/perl5"
+- export PATH="$PATH:$HOME/perl5/bin"
 - graph-easy --as boxart < iana.dot
 - find -name "*.rst" | xargs -L1 -t -I{} rst2xml.py --strict {} /dev/null
 
