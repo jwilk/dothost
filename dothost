@@ -94,7 +94,7 @@ class Mapping(object):
 
 def main():
     options = ArgumentParser().parse_args()
-    mapping = Mapping(pending = options.addresses)
+    mapping = Mapping(pending=options.addresses)
     mapping.update_all()
     mapping.print()
 
