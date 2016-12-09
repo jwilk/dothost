@@ -1,5 +1,5 @@
-dothost (0.1) UNRELEASED; urgency=low
+dothost (0.1) unstable; urgency=low
 
   * Initial release.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Fri, 09 Dec 2016 12:22:36 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Fri, 09 Dec 2016 12:41:26 +0100
