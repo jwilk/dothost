@@ -11,9 +11,6 @@ addons:
   apt:
     packages:
     - libgraph-easy-perl
-cache:
-  directories:
-  - $HOME/.cache
 install:
 - pip install docutils
 script:
