@@ -49,7 +49,7 @@ cd "$sourceroot"/*
 find . -name '__pycache__' | xargs rm -rf
 rm .git*
 rm .travis.yml
-rm README.rst  # shipped as doc/README
+rm README  # shipped as doc/README
 rm private/build-source-tarball
 mv LICENSE doc/
 find . -empty -delete
