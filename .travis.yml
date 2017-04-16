@@ -13,10 +13,11 @@ addons:
     - libgraph-easy-perl
 install:
 - pip install docutils
+- \[ "$TRAVIS_PYTHON_VERSION" = 3.2 ] || pip install pygments
 script:
 - python dothost www.iana.org > iana.dot
 - cat iana.dot
 - graph-easy --as boxart < iana.dot
-- private/check-rst
+- \[ "$TRAVIS_PYTHON_VERSION" = 3.2 ] || private/check-rst
 
 # vim:ts=2 sts=2 sw=2 et
