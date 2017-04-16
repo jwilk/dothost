@@ -1,4 +1,4 @@
-::
+.. code:: console
 
    $ dothost www.iana.org | graph-easy --as boxart
 
