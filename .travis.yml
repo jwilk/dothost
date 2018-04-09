@@ -13,16 +13,17 @@ addons:
   apt:
     packages:
     - libgraph-easy-perl
+before_install:
+- if [[ $TRAVIS_PYTHON_VERSION = 3.2 ]]; then if_pygments=:; fi
 install:
 - pip install pydiatra pyflakes
-- pip install docutils
-- \[ "$TRAVIS_PYTHON_VERSION" = 3.2 ] || pip install pygments
+- $if_pygments pip install docutils pygments
 script:
 - ./dothost www.iana.org > iana.dot
 - cat iana.dot
 - graph-easy --as boxart < iana.dot
 - python3 -m pydiatra .
 - python3 -m pyflakes .
-- \[ "$TRAVIS_PYTHON_VERSION" = 3.2 ] || private/check-rst
+- $if_pygments private/check-rst
 
 # vim:ts=2 sts=2 sw=2 et
