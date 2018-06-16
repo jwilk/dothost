@@ -22,6 +22,7 @@ install:
 - pip install $pyflakes
 - $if_pygments pip install docutils pygments
 script:
+- dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
 - ./dothost www.iana.org > iana.dot
 - cat iana.dot
 - graph-easy --as boxart < iana.dot
