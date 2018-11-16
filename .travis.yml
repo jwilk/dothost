@@ -18,9 +18,9 @@ before_install:
 - if [[ $TRAVIS_PYTHON_VERSION = 3.[23] ]]; then pyflakes='pyflakes<2'; fi
 - if [[ $TRAVIS_PYTHON_VERSION = 3.2 ]]; then if_pygments=:; fi
 install:
-- pip install pydiatra
-- pip install $pyflakes
-- $if_pygments pip install docutils pygments
+- python3 -m pip install pydiatra
+- python3 -m pip install $pyflakes
+- $if_pygments python3 -m pip install docutils pygments
 script:
 - dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
 - ./dothost www.iana.org > iana.dot
