@@ -46,11 +46,6 @@ template_end = '''
 }
 '''
 
-class ArgumentParser(argparse.ArgumentParser):
-    def __init__(self):
-        argparse.ArgumentParser.__init__(self, description=description)
-        self.add_argument('addresses', metavar='ADDRESS', nargs='+', help='IP address or domain name')
-
 def _html_escape(match):
     c = ord(match.group(0))
     return '&#{0};'.format(c)
@@ -115,7 +110,9 @@ class Mapping(object):
         print(template_end.strip(), file=stdout)
 
 def main():
-    options = ArgumentParser().parse_args()
+    ap = argparse.ArgumentParser(description=description)
+    ap.add_argument('addresses', metavar='ADDRESS', nargs='+', help='IP address or domain name')
+    options = ap.parse_args()
     mapping = Mapping(pending=options.addresses)
     mapping.update_all()
     stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='UTF-8')
