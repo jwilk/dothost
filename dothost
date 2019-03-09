@@ -24,6 +24,7 @@
 import argparse
 import collections
 import io
+import re
 import socket
 import sys
 
@@ -49,6 +50,23 @@ class ArgumentParser(argparse.ArgumentParser):
     def __init__(self):
         argparse.ArgumentParser.__init__(self, description=description)
         self.add_argument('addresses', metavar='ADDRESS', nargs='+', help='IP address or domain name')
+
+def _html_escape(match):
+    c = ord(match.group(0))
+    return '&#{0};'.format(c)
+
+def dot_escape(s):
+    # https://www.graphviz.org/doc/info/lang.html says:
+    #
+    #    In quoted strings […] the only escaped character is double-quote
+    #    ("). That is, in quoted strings, the dyad \" is converted to "; all
+    #    other characters are left unchanged. In particular, \\ remains \\.
+    #
+    # This makes little sense, and doesn't match how dot(1) actually works.
+    # Oh well. Doubling the backslashes can't hurt much.
+    s = s.replace('\\', '\\\\')
+    s = re.sub('[&"]', _html_escape, s)
+    return '"{s}"'.format(s=s)
 
 class Mapping(object):
 
@@ -91,9 +109,9 @@ class Mapping(object):
         print(template_begin.strip(), file=stdout)
         for source, targets in self.mapping.items():
             if source in self.initial:
-                print('    "{source}" [style=bold]'.format(source=source), file=stdout)
+                print('    {source} [style=bold]'.format(source=dot_escape(source)), file=stdout)
             for target in targets:
-                print('    "{source}" -> "{target}"'.format(source=source, target=target), file=stdout)
+                print('    {source} -> {target}'.format(source=dot_escape(source), target=dot_escape(target)), file=stdout)
         print(template_end.strip(), file=stdout)
 
 def main():
