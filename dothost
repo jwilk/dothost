@@ -23,6 +23,7 @@
 
 import argparse
 import collections
+import io
 import socket
 import sys
 
@@ -90,7 +91,7 @@ class Mapping(object):
         print(template_begin.strip(), file=stdout)
         for source, targets in self.mapping.items():
             if source in self.initial:
-                print('    "{source}" [style=bold]'.format(source=source))
+                print('    "{source}" [style=bold]'.format(source=source), file=stdout)
             for target in targets:
                 print('    "{source}" -> "{target}"'.format(source=source, target=target), file=stdout)
         print(template_end.strip(), file=stdout)
@@ -99,7 +100,8 @@ def main():
     options = ArgumentParser().parse_args()
     mapping = Mapping(pending=options.addresses)
     mapping.update_all()
-    mapping.print()
+    stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='UTF-8')
+    mapping.print(stdout=stdout)
 
 if __name__ == '__main__':
     main()
