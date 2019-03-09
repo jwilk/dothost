@@ -30,7 +30,7 @@ import sys
 
 description = \
 '''
-host(1) with Graphviz output.
+DNS lookup with Graphviz output
 '''
 
 template_begin = '''
