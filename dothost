@@ -98,16 +98,14 @@ class Mapping(object):
             return set()
         self.done.add(address)
 
-    def print(self, stdout=None):
-        if stdout is None:
-            stdout = sys.stdout
-        print(template_begin.strip(), file=stdout)
+    def print(self):
+        print(template_begin.strip())
         for source, targets in self.mapping.items():
             if source in self.initial:
-                print('    {source} [style=bold]'.format(source=dot_escape(source)), file=stdout)
+                print('    {source} [style=bold]'.format(source=dot_escape(source)))
             for target in targets:
-                print('    {source} -> {target}'.format(source=dot_escape(source), target=dot_escape(target)), file=stdout)
-        print(template_end.strip(), file=stdout)
+                print('    {source} -> {target}'.format(source=dot_escape(source), target=dot_escape(target)))
+        print(template_end.strip())
 
 def main():
     ap = argparse.ArgumentParser(description=description)
@@ -115,8 +113,8 @@ def main():
     options = ap.parse_args()
     mapping = Mapping(pending=options.addresses)
     mapping.update_all()
-    stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='UTF-8')
-    mapping.print(stdout=stdout)
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='UTF-8')
+    mapping.print()
 
 if __name__ == '__main__':
     main()
