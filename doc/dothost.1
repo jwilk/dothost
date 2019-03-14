@@ -1,0 +1,43 @@
+.\" Copyright © 2019 Jakub Wilk <jwilk@jwilk.net>
+.\" SPDX-License-Identifier: MIT
+
+.TH DOTHOST 1 2019-03-14 "dothost 0.1.1" ""
+.SH NAME
+dothost \- DNS lookup with Graphviz output
+.SH SYNOPSIS
+.SY dothost
+.I ADDRESS
+.RI [ ADDDRESS \&.\|.\|.\&]
+.YS
+.SH DESCRIPTION
+.B dothost
+is a DNS lookup utility,
+which produces output in Graphviz format.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Show help message and exit.
+.TP
+.B \-\-version
+Show version information and exit.
+.SH EXAMPLE
+.EX
+.RB "$ " "dothost www.iana.org | graph-easy \-\-as ascii"
+
+       +\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-+
+       v                         |
+     #####################     +\-\-\-\-\-\-\-\-\-\-\-\-+
+  +> #   www.iana.org    # \-\-> | 192.0.32.8 |
+  |  #####################     +\-\-\-\-\-\-\-\-\-\-\-\-+
+  |    |
+  |    |
+  |    v
+  |  +\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-+
+  +\- | 2620:0:2d0:200::8 |
+     +\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-+
+.EE
+.SH SEE ALSO
+.BR graphviz (7),
+.BR host (1),
+.BR gethostbyaddr (3),
+.BR getaddrinfo (3)
