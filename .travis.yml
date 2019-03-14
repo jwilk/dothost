@@ -26,11 +26,11 @@ install:
 - $if_pygments python3 -m pip install docutils pygments
 script:
 - dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
+- $if_pygments private/check-rst
 - ./dothost www.iana.org > iana.dot
 - cat iana.dot
 - graph-easy --as boxart < iana.dot
 - python3 -m pydiatra .
 - python3 -m pyflakes .
-- $if_pygments private/check-rst
 
 # vim:ts=2 sts=2 sw=2 et
