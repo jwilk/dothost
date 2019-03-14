@@ -1,4 +1,4 @@
-dothost (0.2) UNRELEASED; urgency=low
+dothost (0.2) unstable; urgency=low
 
   * Add makefile.
   * Add test suite.
@@ -12,7 +12,7 @@ dothost (0.2) UNRELEASED; urgency=low
     + Update description in --help message.
   * Improve error handling.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Thu, 14 Mar 2019 19:58:18 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Thu, 14 Mar 2019 20:02:09 +0100
 
 dothost (0.1) unstable; urgency=low
 
