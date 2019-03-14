@@ -15,6 +15,7 @@ jobs:
 addons:
   apt:
     packages:
+    - graphviz
     - libgraph-easy-perl
 before_install:
 - pyflakes=pyflakes
@@ -27,9 +28,7 @@ install:
 script:
 - dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
 - $if_pygments restructuredtext-lint --encoding=UTF-8 doc/README
-- ./dothost www.iana.org > iana.dot
-- cat iana.dot
-- graph-easy --as boxart < iana.dot
+- make test network=1
 - python3 -m pydiatra .
 - python3 -m pyflakes .
 
