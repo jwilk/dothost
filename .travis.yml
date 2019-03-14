@@ -23,10 +23,10 @@ before_install:
 install:
 - python3 -m pip install pydiatra
 - python3 -m pip install $pyflakes
-- $if_pygments python3 -m pip install docutils pygments
+- $if_pygments python3 -m pip install restructuredtext-lint pygments
 script:
 - dpkg-parsechangelog -ldoc/changelog --all 2>&1 >/dev/null | { ! grep .; }
-- $if_pygments private/check-rst
+- $if_pygments restructuredtext-lint --encoding=UTF-8 doc/README
 - ./dothost www.iana.org > iana.dot
 - cat iana.dot
 - graph-easy --as boxart < iana.dot
