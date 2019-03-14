@@ -100,9 +100,10 @@ class Mapping(object):
 
     def print(self):
         print(template_begin.strip())
-        for source, targets in self.mapping.items():
-            if source in self.initial:
+        for source in self.initial:
+            if source in self.mapping:
                 print('    {source} [style=bold]'.format(source=dot_escape(source)))
+        for source, targets in self.mapping.items():
             for target in targets:
                 print('    {source} -> {target}'.format(source=dot_escape(source), target=dot_escape(target)))
         print(template_end.strip())
