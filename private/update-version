@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e -u
+version=${1:?"no version number provided"}
+date="$(date -u --rfc-3339=date)"
+PS4='$ '
+set -x
+dch -m -v "$version" -u low -c doc/changelog
+export version date
+perl -pi -e 's/^__version__ = '"'"'\K[\w.]+/$ENV{version}/' dothost
+perl -pi -e 's/^([.]TH \S+ 1 )([0-9-]+)( "dothost )([0-9.]+)/$1$ENV{date}$3$ENV{version}/' doc/*.1
