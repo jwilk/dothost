@@ -1,3 +1,14 @@
+Overview
+========
+
+**dothost** is a DNS lookup utility,
+which produces output in Graphviz_ format.
+
+.. _Graphviz: https://www.graphviz.org/
+
+Example
+-------
+
 .. code:: console
 
    $ dothost www.iana.org | graph-easy --as boxart
