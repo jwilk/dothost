@@ -1,8 +1,18 @@
 dothost (0.1.1) UNRELEASED; urgency=low
 
-  * 
+  * Add makefile.
+  * Add test suite.
+  * Fix string quoting in output.
+  * Always use UTF-8 as output encoding.
+  * Make the output more stable.
+  * Add the --version option.
+  * Improve documentation:
+    + Expand README.
+    + Add manual page.
+    + Update description in --help message.
+  * Improve error handling.
 
- -- Jakub Wilk <jwilk@jwilk.net>  Fri, 30 Dec 2016 22:15:39 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Thu, 14 Mar 2019 19:10:36 +0100
 
 dothost (0.1) unstable; urgency=low
 
