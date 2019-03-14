@@ -25,4 +25,9 @@ Example
      └─ │ 2620:0:2d0:200::8 │
         └───────────────────┘
 
+Prerequisites
+=============
+
+* Python ≥ 3.2
+
 .. vim:ts=3 sts=3 sw=3 et ft=rst
