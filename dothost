@@ -98,7 +98,7 @@ class Mapping():
             for _, _, _, _, ip in socket.getaddrinfo(address, 0):
                 self.add(address, ip[0])
         except socket.gaierror:
-            return set()
+            return
         self.done.add(address)
 
     def print(self):
