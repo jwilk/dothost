@@ -11,7 +11,7 @@ if [ "${prog%/*}" = "$prog" ]
 then
     orig_prog="$prog"
     prog=$(command -v "$prog") || {
-        printf '%s: command not found\n' "$orig_prog" >&1
+        printf '%s: command not found\n' "$orig_prog" >&2
         exit 1
     }
 fi
