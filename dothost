@@ -51,7 +51,7 @@ template_end = '''
 
 def _html_escape(match):
     c = ord(match.group(0))
-    return '&#{0};'.format(c)
+    return f'&#{c};'
 
 def dot_escape(s):
     # https://www.graphviz.org/doc/info/lang.html says:
@@ -64,7 +64,7 @@ def dot_escape(s):
     # Oh well. Doubling the backslashes can't hurt much.
     s = s.replace('\\', '\\\\')
     s = re.sub('[&"]', _html_escape, s)
-    return '"{s}"'.format(s=s)
+    return f'"{s}"'
 
 class Mapping():
 
@@ -103,12 +103,13 @@ class Mapping():
 
     def print(self):
         print(template_begin.strip())
+        x = dot_escape
         for source in self.initial:
             if source in self.mapping:
-                print('    {source} [style=bold]'.format(source=dot_escape(source)))
+                print(f'    {x(source)} [style=bold]')
         for source, targets in self.mapping.items():
             for target in targets:
-                print('    {source} -> {target}'.format(source=dot_escape(source), target=dot_escape(target)))
+                print(f'    {x(source)} -> {x(target)}')
         print(template_end.strip())
 
 class VersionAction(argparse.Action):
@@ -125,14 +126,14 @@ class VersionAction(argparse.Action):
         )
 
     def __call__(self, parser, namespace, values, option_string=None):
-        print('{prog} {0}'.format(__version__, prog=parser.prog))
+        print(f'{parser.prog} {__version__}')
         print('+ Python {0}.{1}.{2}'.format(*sys.version_info))
         try:
             libc = os.confstr('CS_GNU_LIBC_VERSION')
         except (ValueError, OSError):
             pass
         else:
-            print('+ {libc}'.format(libc=libc))
+            print(f'+ {libc}')
         parser.exit()
 
 def main():
