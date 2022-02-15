@@ -22,6 +22,7 @@ jobs:
         python-version: ${{matrix.python}}
     - name: install deps
       run: |
+        printf 'Apt::Install-Recommends "false";\n' | sudo tee -a /etc/apt/apt.conf
         sudo apt-get update
         sudo apt-get install graphviz libgraph-easy-perl
     - name: run tests
