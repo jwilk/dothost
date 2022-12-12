@@ -28,6 +28,6 @@ Example
 Prerequisites
 =============
 
-* Python ≥ 3.6
+* Python ≥ 3.7
 
 .. vim:ts=3 sts=3 sw=3 et ft=rst
