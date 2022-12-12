@@ -23,7 +23,6 @@
 
 import argparse
 import collections
-import io
 import os
 import re
 import socket
@@ -145,7 +144,7 @@ def main():
     options = ap.parse_args()
     mapping = Mapping(pending=options.addresses)
     mapping.update_all()
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='UTF-8')
+    sys.stdout.reconfigure(encoding='UTF-8')
     mapping.print()
 
 if __name__ == '__main__':
