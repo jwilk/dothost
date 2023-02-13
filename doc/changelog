@@ -1,8 +1,12 @@
 dothost (0.2.1) UNRELEASED; urgency=low
 
-  * 
+  * Drop support for Python < 3.6.
+  * Improve the test suite.
+  * Improve the manual page:
+    + Fix typesetting of ASCII hyphen.
+    + Don't pass “--as ascii” to graph-easy. (It's the default.)
 
- -- Jakub Wilk <jwilk@jwilk.net>  Sat, 16 Mar 2019 19:19:43 +0100
+ -- Jakub Wilk <jwilk@jwilk.net>  Mon, 13 Feb 2023 10:10:10 +0100
 
 dothost (0.2) unstable; urgency=low
 
