@@ -1,6 +1,6 @@
 dothost (0.2.1) UNRELEASED; urgency=low
 
-  * Drop support for Python < 3.6.
+  * Drop support for Python < 3.7.
   * Improve the test suite.
   * Improve the manual page:
     + Fix typesetting of ASCII hyphen.
