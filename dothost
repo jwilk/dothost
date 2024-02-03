@@ -25,6 +25,7 @@ import argparse
 import collections
 import os
 import re
+import signal
 import socket
 import sys
 
@@ -145,6 +146,7 @@ def main():
     mapping = Mapping(pending=options.addresses)
     mapping.update_all()
     sys.stdout.reconfigure(encoding='UTF-8')
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     mapping.print()
 
 if __name__ == '__main__':
