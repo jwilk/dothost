@@ -50,8 +50,10 @@ jobs:
         cd /
         man 1 dothost | grep -A 10 -w DOTHOST
     - name: run post-install tests
-      run:
+      run: |
+        rm dothost
         make test-installed
+        git restore dothost
     - name: run pydiatra
       run: |
         python3 -m pip install pydiatra
