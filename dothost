@@ -68,7 +68,7 @@ def dot_escape(s):
     s = re.sub('[&"]', _html_escape, s)
     return f'"{s}"'
 
-class Mapping():
+class Mapping:
 
     def __init__(self, pending=()):
         self.pending = set(pending)
