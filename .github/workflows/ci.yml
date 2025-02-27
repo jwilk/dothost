@@ -27,10 +27,12 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{matrix.python}}
-    - name: install deps
+    - name: set up APT
       run: |
         printf 'Apt::Install-Recommends "false";\n' | sudo tee -a /etc/apt/apt.conf
         sudo apt-get update
+    - name: install deps
+      run: |
         sudo apt-get install graphviz libgraph-easy-perl
     - name: run tests
       run:
