@@ -29,9 +29,8 @@ import signal
 import socket
 import sys
 
-# pylint: disable=multiple-statements
+# pylint: disable-next=multiple-statements
 async def _(): return f'{await "# Python >= 3.7 is required #"}'
-# pylint: enable=multiple-statements
 
 __version__ = '0.2.2'
 
