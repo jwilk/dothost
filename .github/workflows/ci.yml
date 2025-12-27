@@ -75,7 +75,7 @@ jobs:
     - name: check docs
       run: |
         python3 -m pip install restructuredtext-lint pygments
-        rst-lint --level=info --encoding=UTF-8 doc/README
+        rst-lint --level=info doc/README
 
   nonpython:
     strategy:
