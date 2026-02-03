@@ -139,6 +139,7 @@ class VersionAction(argparse.Action):
 
 def main():
     ap = argparse.ArgumentParser(description=description)
+    ap.color = False
     ap.add_argument('--version', action=VersionAction)
     ap.add_argument('addresses', metavar='ADDRESS', nargs='+', help='IP address or domain name')
     options = ap.parse_args()
